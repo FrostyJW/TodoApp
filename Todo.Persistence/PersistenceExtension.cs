@@ -11,7 +11,7 @@ public static class PersistenceExtension
     {
         services.AddDbContext<TodoDbContext>(options =>
         {
-            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Todo.App"));
+            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
         });
 
         services.AddIdentityCore<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
