@@ -1,5 +1,5 @@
 ﻿namespace Todo.Domain.Entities;
-public class TodoItem : BaseEntity<int>
+public class TodoItem : BaseEntity
 {
     //public int UserId { get; set; }
     public string Title { get; set; }
