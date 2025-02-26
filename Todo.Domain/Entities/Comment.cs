@@ -1,5 +1,5 @@
 ﻿namespace Todo.Domain.Entities;
-public class Comment : BaseEntity<int>
+public class Comment : BaseEntity
 {
     public string Text { get; set; }
     public DateTime CreationDate { get; set; }
