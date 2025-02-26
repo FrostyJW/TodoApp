@@ -5,4 +5,5 @@ public class User : BaseEntity<int>
     public string Role { get; set; }
     public string PasswordHash { get; set; }
     public virtual List<TodoItem> Todos { get; set; }
+    public virtual List<Project> Projects { get; set; }
 }

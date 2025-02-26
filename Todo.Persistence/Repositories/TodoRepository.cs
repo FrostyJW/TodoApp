@@ -43,6 +43,7 @@ public class TodoRepository(TodoDbContext context) : ITodoRepository
         todo.Title = entity.Title;
         todo.Description = entity.Description;
         todo.Priority = entity.Priority;
+        todo.Status = entity.Status;
         todo.Deadline = entity.Deadline;
         todo.CreationTime = entity.CreationTime;
         todo.Category = entity.Category;
@@ -50,4 +51,8 @@ public class TodoRepository(TodoDbContext context) : ITodoRepository
 
         await context.SaveChangesAsync();
     }
+    //FilterByProject
+    //FilterByDeadline
+    //FilterByPriority
+    //FilterByStatus
 }
