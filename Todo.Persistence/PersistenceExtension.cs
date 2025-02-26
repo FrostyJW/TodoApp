@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Todo.Domain.Entities;
 using Todo.Persistence.Contexts;
 
 namespace Todo.Persistence;
@@ -14,7 +15,7 @@ public static class PersistenceExtension
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
         });
 
-        services.AddIdentityCore<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+        services.AddIdentityCore<User>(options => options.SignIn.RequireConfirmedAccount = true)
              .AddEntityFrameworkStores<TodoDbContext>();
         
         return services;

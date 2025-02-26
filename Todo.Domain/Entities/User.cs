@@ -1,9 +1,8 @@
-﻿namespace Todo.Domain.Entities;
-public class User : BaseEntity<int>
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace Todo.Domain.Entities;
+public class User : IdentityUser
 {
-    public string Email { get; set; }
-    public string Role { get; set; }
-    public string PasswordHash { get; set; }
     public virtual List<TodoItem> Todos { get; set; }
     public virtual List<Project> Projects { get; set; }
 }

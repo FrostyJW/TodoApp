@@ -1,7 +1,8 @@
-﻿using Todo.Domain.Entities;
+﻿using Microsoft.AspNetCore.Identity;
+using Todo.Domain.Entities;
 
 namespace Todo.Persistence.Interfaces;
-public interface IRepository<TEntity> where TEntity : BaseEntity<int>
+public interface IRepository<TEntity> where TEntity : class
 {
     Task<IEnumerable<TEntity>> GetAllAsync();
     Task<TEntity> GetByIdAsync(int id);

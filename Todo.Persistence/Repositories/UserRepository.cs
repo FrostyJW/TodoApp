@@ -1,41 +1,51 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration.EnvironmentVariables;
 using Todo.Domain.Entities;
 using Todo.Persistence.Contexts;
 using Todo.Persistence.Interfaces;
 
 namespace Todo.Persistence.Repositories;
-public class UserRepository(TodoDbContext context) : IUserRepository
+public class UserRepository : IUserRepository
 {
+    private readonly UserManager<User> userManager;
+    private readonly TodoDbContext context;
+    public UserRepository(UserManager<User> userManager, TodoDbContext context)
+    {
+        this.userManager = userManager;
+        this.context = context;
+    }
     public async Task AddAsync(User entity)
     {
-        await context.Users.AddAsync(entity);
+        await userManager.CreateAsync(entity);
         await context.SaveChangesAsync();
     }
 
     public async Task Delete(int id)
     {
-        var user = await context.Users.FirstOrDefaultAsync(p => p.Id == id);
-        if(user is not null)
+        var user = await userManager.FindByIdAsync(id.ToString());
+        if (user is not null)
         {
-            context.Users.Remove(user);
+            await userManager.DeleteAsync(user);
             await context.SaveChangesAsync();
         }
     }
 
     public async Task<IEnumerable<User>> GetAllAsync()
     {
-        return await context.Users.Include(p => p.Todos).ToListAsync();
+        //return null;
+        return await userManager.Users.Include(p => p.Todos).ToListAsync();
     }
 
     public async Task<User> GetByIdAsync(int id)
     {
-        return await context.Users.Include(p => p.Todos).FirstOrDefaultAsync(p => p.Id == id);
+        return await userManager.Users.Include(p => p.Todos).FirstOrDefaultAsync(p => p.Id == id.ToString());
     }
 
     public async Task Update(User entity)
     {
-        var user = await context.Users.Include(p => p.Todos).FirstOrDefaultAsync(p => p.Id == entity.Id);
-        if(user is null)
+        var user = await userManager.Users.Include(p => p.Todos).FirstOrDefaultAsync(p => p.Id == entity.Id);
+        if (user is null)
         {
             return;
         }
@@ -43,6 +53,6 @@ public class UserRepository(TodoDbContext context) : IUserRepository
         user.Email = entity.Email;
         user.Todos = entity.Todos;
 
-        await context.SaveChangesAsync();
+        await userManager.UpdateAsync(user);
     }
 }
