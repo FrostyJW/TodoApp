@@ -24,17 +24,17 @@ public class ProjectRepository(TodoDbContext context) : IProjectRepository
 
     public async Task<IEnumerable<Project>> GetAllAsync()
     {
-        return await context.Projects.Include(p => p.Todos).ToListAsync();
+        return await context.Projects.Include(p => p.Todos).Include(p => p.Users).ToListAsync();
     }
 
     public async Task<Project> GetByIdAsync(int id)
     {
-        return await context.Projects.Include(p => p.Todos).FirstOrDefaultAsync(p => p.Id == id);
+        return await context.Projects.Include(p => p.Todos).Include(p => p.Users).FirstOrDefaultAsync(p => p.Id == id);
     }
 
     public async Task Update(Project entity)
     {
-        var project = await context.Projects.Include(p => p.Todos).FirstOrDefaultAsync(p => p.Id == entity.Id);
+        var project = await context.Projects.Include(p => p.Todos).Include(p => p.Users).FirstOrDefaultAsync(p => p.Id == entity.Id);
         if (project is null)
         {
             return;
@@ -44,6 +44,7 @@ public class ProjectRepository(TodoDbContext context) : IProjectRepository
         project.Status = entity.Status;
         project.Deadline = entity.Deadline;
         project.Todos = entity.Todos;
+        project.Users = project.Users;
 
         await context.SaveChangesAsync();
     }
