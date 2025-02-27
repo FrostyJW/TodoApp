@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Todo.Domain.Entities;
+using Todo.Infrastructure.Enums;
 using Todo.Persistence.Contexts;
 using Todo.Persistence.Interfaces;
 
@@ -51,7 +52,19 @@ public class TodoRepository(TodoDbContext context) : ITodoRepository
 
         await context.SaveChangesAsync();
     }
-    //FilterByProject
+    public async Task<IEnumerable<TodoItem>> FilterByDeadlineAsync()
+    {
+        var currentDate = DateTime.Now;
+        return await context.TodoItems.Include(p => p.User).Include(p => p.Category).Where(p => p.Deadline < currentDate).ToListAsync();
+    }
+    public async Task<IEnumerable<TodoItem>> FilterByPriorityAsync(Priority priority)
+    {
+        return await context.TodoItems.Include(p => p.User).Include(p => p.Category).Where(p => p.Priority == priority).ToListAsync();
+    }
+    public async Task<IEnumerable<TodoItem>> FilterByStatusAsync(Status status)
+    {
+        return await context.TodoItems.Include(p => p.User).Include(p => p.Category).Where(p => p.Status == status).ToListAsync();
+    }
     //FilterByDeadline
     //FilterByPriority
     //FilterByStatus

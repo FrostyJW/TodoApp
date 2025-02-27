@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Todo.Domain.Entities;
 
-namespace Todo.Persistence.Interfaces
+namespace Todo.Persistence.Interfaces;
+public interface ICommentRepository : IRepository<Comment>
 {
-    internal class ICommentRepository
-    {
-    }
 }
