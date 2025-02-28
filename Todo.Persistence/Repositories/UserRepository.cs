@@ -49,7 +49,6 @@ public class UserRepository : IUserRepository
         {
             return;
         }
-        user.PasswordHash = entity.PasswordHash;
         user.Email = entity.Email;
         user.Todos = entity.Todos;
 
