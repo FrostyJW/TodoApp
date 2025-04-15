@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration.EnvironmentVariables;
 using Todo.Domain.Entities;
 using Todo.Persistence.Contexts;
 using Todo.Persistence.Interfaces;
@@ -49,7 +48,6 @@ public class UserRepository : IUserRepository
         {
             return;
         }
-        user.PasswordHash = entity.PasswordHash;
         user.Email = entity.Email;
         user.Todos = entity.Todos;
 

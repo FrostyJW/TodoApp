@@ -48,4 +48,9 @@ public class ProjectRepository(TodoDbContext context) : IProjectRepository
 
         await context.SaveChangesAsync();
     }
+    public async Task<IEnumerable<Project>> FilterByProjectAsync(string projectTitle)
+    {
+        return await context.Projects.Include(p => p.Todos).Include(p => p.Users).Where(p => p.Name == projectTitle).ToListAsync();
+    }
+    //FilterByProject
 }
