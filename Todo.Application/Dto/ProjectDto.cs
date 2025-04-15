@@ -6,6 +6,6 @@ public class ProjectDto
     public string Description { get; set; }
     public string Status { get; set; } 
     public DateTime Deadline { get; set; }
-    public virtual List<TodoItemDto> Todos { get; set; }
+    public List<TodoItemDto> Todos { get; set; }
 }
 

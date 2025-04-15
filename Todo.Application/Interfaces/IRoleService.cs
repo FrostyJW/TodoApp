@@ -1,9 +1,7 @@
-﻿namespace Todo.Application.Interfaces;
-public class IRoleService
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace Todo.Application.Interfaces;
+public interface IRoleService : IService<IdentityRole>
 {
-    //CreatRole
-    //UpdateRole
-    //DeleteRole
-    //GetAllRoles
-    //GetRoleById
+
 }

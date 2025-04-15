@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Todo.Domain.Entities;
 using Todo.Infrastructure.Enums;
 using Todo.Persistence.Contexts;

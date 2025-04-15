@@ -11,4 +11,5 @@ public class TodoItem : BaseEntity
     public DateTime CreationTime { get; set; }
     public virtual Category Category { get; set; }
     public virtual User User { get; set; }
+    public virtual Project Project { get; set; }
 }

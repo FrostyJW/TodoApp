@@ -9,6 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Todo.App", "Todo.App\Todo.A
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Todo.Application", "Todo.Application\Todo.Application.csproj", "{ADC46FF9-8D9B-4465-8F7B-4DAF519C08BD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AC03DC98-D9CB-4FF9-9D5D-07F567556E3E} = {AC03DC98-D9CB-4FF9-9D5D-07F567556E3E}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Todo.Persistence", "Todo.Persistence\Todo.Persistence.csproj", "{82D7FA68-C147-4EC4-BE95-2E231CE5EB75}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -17,7 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Todo.Persistence", "Todo.Pe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Todo.Domain", "Todo.Domain\Todo.Domain.csproj", "{AC03DC98-D9CB-4FF9-9D5D-07F567556E3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Infrastructure", "Todo.Infrastructure\Todo.Infrastructure.csproj", "{A839EA37-CC5A-4F85-97F5-6B8622401884}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Todo.Infrastructure", "Todo.Infrastructure\Todo.Infrastructure.csproj", "{A839EA37-CC5A-4F85-97F5-6B8622401884}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,7 +1,7 @@
 ﻿using Todo.Application.Dto;
 
 namespace Todo.Application.Interfaces;
-public interface ICategoryService
+public interface ICategoryService : IService<CategoryDto>
 {
-    Task<List<CategoryDto>> GetAllAsync();
+    
 }
