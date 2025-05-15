@@ -1,19 +1,20 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Todo.Application.Interfaces;
+using Todo.Domain.Entities;
 
 namespace Todo.Application.Services;
 public class AuthorizationService : IAuthorizationService
 {
-    private readonly UserManager<IdentityUser> userManager;
-    private readonly SignInManager<IdentityUser> signInManager;
-    public AuthorizationService(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+    private readonly IUserService userService;
+    private readonly SignInManager<User> signInManager;
+    public AuthorizationService(IUserService userService, SignInManager<User> signInManager)
     {
-        this.userManager = userManager;
-        this.signInManager = signInManager;
+        this.signInManager = signInManager;    
+        this.userService = userService;
     }
     public async Task<SignInResult> Login(string email, string password)
     {
-        var user = await userManager.FindByEmailAsync(email);
+        var user = await userService.FindUserByEmail(email);
         if(user is null)
         {
             return SignInResult.Failed;
@@ -28,10 +29,10 @@ public class AuthorizationService : IAuthorizationService
 
     public async Task<bool> ResetPassword(string email, string token, string newPassword)
     {
-        var user = await userManager.FindByEmailAsync(email);
+        var user = await userService.FindUserByEmail(email);
         if (user is null)
             return false;
-        var result = await userManager.ResetPasswordAsync(user, token, newPassword);
+        var result = await userService.ResetUserPasswordAsync(user, token, newPassword);
         return result.Succeeded;
     }
 }

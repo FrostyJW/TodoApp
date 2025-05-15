@@ -34,9 +34,14 @@ public class RoleRepository : IRoleRepository
         return await roleManager.Roles.ToListAsync();
     }
 
+    public async Task<IdentityRole> GetById(string id)
+    {
+        return await roleManager.FindByIdAsync(id);
+    }
+
     public async Task<IdentityRole> GetByIdAsync(int id)
     {
-        return await roleManager.FindByIdAsync(id.ToString());
+        throw new NotImplementedException();
     }
 
     public async Task Update(IdentityRole entity)

@@ -1,5 +1,4 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+using Todo.Application;
 using Todo.Persistence;
 
 
@@ -7,9 +6,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddPersistence(builder.Configuration);
 
+builder.Services.AddApplication(builder.Configuration);
+
+builder.Services.AddControllers();
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddControllersWithViews();
+
 
 var app = builder.Build();
 
@@ -28,7 +32,11 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.MapControllers();
+
+app.UseAuthentication();
 app.UseAuthorization();
+
 
 app.MapControllerRoute(
     name: "default",
